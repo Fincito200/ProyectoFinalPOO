@@ -4,44 +4,43 @@ import java.util.ArrayList;
 
 public class Jugador {
     private String nombre;
-    private int posicion;
     private int puntos;
     private int comodines;
+    private int posicion;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
-        this.posicion = 0;
         this.puntos = 0;
         this.comodines = 0;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getPosicion() {
-        return posicion;
+        this.posicion = 0; // Inicio
     }
 
     public void mover(int pasos, int totalCasillas) {
         posicion = (posicion + pasos) % totalCasillas;
     }
 
-    public void ganarPuntos(int p) {
-        puntos += p;
-        System.out.println(nombre + " ahora tiene " + puntos + " puntos.");
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void ganarComodin() {
+        comodines++;
+    }
+
+    public void sumarPuntos(int puntos) {
+        this.puntos += puntos;
     }
 
     public int getPuntos() {
         return puntos;
     }
-    
-    public void ganarComodin() {
-    comodines++;
-    System.out.println(nombre + " ahora tiene " + comodines + " comodines.");
-}
 
-public int getComodines() {
-    return comodines;
-}
+    public int getComodines() {
+        return comodines;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
 }

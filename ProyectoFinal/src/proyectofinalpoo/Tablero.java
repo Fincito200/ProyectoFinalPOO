@@ -1,46 +1,28 @@
 package proyectofinalpoo;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Tablero {
-    private ArrayList<Casilla> casillas = new ArrayList<>();
+    private ArrayList<Casilla> casillas;
 
     public Tablero() {
-        initCasillas();
+        casillas = new ArrayList<>();
+        inicializarCasillas();
     }
 
-    public Pregunta getPreguntaAzar() {
-    ArrayList<Pregunta> preguntas = new ArrayList<>();
-    for (Casilla c : casillas) {
-        if (c instanceof Pregunta) {
-            preguntas.add((Pregunta) c);
-        }
-    }
-
-    // elige una al azar
-    if (!preguntas.isEmpty()) {
-        int indice = new Random().nextInt(preguntas.size());
-        return preguntas.get(indice);
-    } else {
-        return new Pregunta("Default", -1, "Sin preguntas disponibles", "");
-    }
-    }
-    
-    public void initCasillas() {
-        casillas.add(new Propiedad("Inicio", 0, 0));
-        casillas.add(new Pregunta("Pregunta 1", 1, "¿Capital de Perú?", "Lima"));
-        casillas.add(new Pregunta("Pregunta 2", 2, "5 x 6 = ?", "30"));
-        casillas.add(new Pregunta("Pregunta 3", 3, "Raíz cuadrada de 49?", "7"));
-        casillas.add(new Comodin("Comodin Casilla 5", 4, "Gana un comodin extra"));
-        // continua hasta completar todas tus casillas
+    private void inicializarCasillas() {
+        casillas.add(new Casilla("Inicio", "inicio"));
+        casillas.add(new Casilla("Casilla 2", "pregunta"));
+        casillas.add(new Casilla("Casilla 3", new Propiedad("Parque", 100)));
+        casillas.add(new Casilla("Casilla 4", "pregunta"));
+        casillas.add(new Casilla("Casilla 5", new Comodin("Comodín estrella", "gana comodín")));
     }
 
     public Casilla getCasilla(int posicion) {
-        return casillas.get(posicion);
+        return casillas.get(posicion % casillas.size());
     }
 
-    public int totalCasillas() {
+    public int getTotalCasillas() {
         return casillas.size();
     }
 }

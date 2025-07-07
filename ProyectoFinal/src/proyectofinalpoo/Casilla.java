@@ -8,22 +8,42 @@ package proyectofinalpoo;
  *
  * @author AARON
  */
-public abstract class Casilla {
-    protected String nombre;
-    protected int posicion;
+public class Casilla {
+    private String nombre;
+    private String tipo; // inicio, pregunta, comodin, propiedad
+    private Comodin comodin;
+    private Propiedad propiedad;
 
-    public Casilla(String nombre, int posicion) {
+    public Casilla(String nombre, String tipo) {
         this.nombre = nombre;
-        this.posicion = posicion;
+        this.tipo = tipo;
+    }
+
+    public Casilla(String nombre, Comodin comodin) {
+        this.nombre = nombre;
+        this.tipo = "comodin";
+        this.comodin = comodin;
+    }
+
+    public Casilla(String nombre, Propiedad propiedad) {
+        this.nombre = nombre;
+        this.tipo = "propiedad";
+        this.propiedad = propiedad;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getPosicion() {
-        return posicion;
+    public String getTipo() {
+        return tipo;
     }
 
-    public abstract void accion(Jugador jugador);
+    public Comodin getComodin() {
+        return comodin;
+    }
+
+    public Propiedad getPropiedad() {
+        return propiedad;
+    }
 }

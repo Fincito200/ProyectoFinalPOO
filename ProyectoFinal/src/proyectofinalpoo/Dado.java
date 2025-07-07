@@ -14,6 +14,6 @@ public class Dado {
     private Random random = new Random();
 
     public int tirar() {
-        return random.nextInt(6) + 1; // 1 al 6
+        return random.nextInt(6) + 1;
     }
 }

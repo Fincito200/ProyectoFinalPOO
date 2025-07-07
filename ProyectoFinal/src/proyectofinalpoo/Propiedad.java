@@ -8,24 +8,32 @@ package proyectofinalpoo;
  *
  * @author AARON
  */
-public class Propiedad extends Casilla {
+public class Propiedad {
+    private String nombre;
     private int precio;
-    private Jugador dueno;
+    private Jugador propietario;
 
-    public Propiedad(String nombre, int posicion, int precio) {
-        super(nombre, posicion);
+    public Propiedad(String nombre, int precio) {
+        this.nombre = nombre;
         this.precio = precio;
-        this.dueno = null;
+        this.propietario = null;
     }
 
-    @Override
-    public void accion(Jugador jugador) {
-        if (dueno == null) {
-            System.out.println(jugador.getNombre() + " puede comprar " + nombre + " por " + precio);
-            // lógica de compra aquí
-        } else if (!dueno.equals(jugador)) {
-            System.out.println(jugador.getNombre() + " paga renta a " + dueno.getNombre());
-            // lógica de pago aquí
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public Jugador getPropietario() {
+        return propietario;
+    }
+
+    public void comprar(Jugador jugador) {
+        if (propietario == null) {
+            propietario = jugador;
         }
     }
 }

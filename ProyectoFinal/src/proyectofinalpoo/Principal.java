@@ -4,7 +4,10 @@
  */
 package proyectofinalpoo;
 
+
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -14,15 +17,36 @@ import java.util.ArrayList;
 public class Principal extends javax.swing.JFrame {
 
     private Juego juego;
-    private Tablero tablero;
-    
     private javax.swing.JLabel[] jlblCasillas;
+    private Random random = new Random();
     
     public Principal() {
         initComponents();
         inicializarLabels();
         inicializarJuego();
     }
+    
+    private void hacerPregunta(Jugador jugador) {
+    // Lista de preguntas
+    ArrayList<Pregunta> preguntas = new ArrayList<>();
+    preguntas.add(new Pregunta("¿Capital de Perú?", "Lima"));
+    preguntas.add(new Pregunta("¿2 + 2?", "4"));
+    preguntas.add(new Pregunta("¿Color del cielo?", "Azul"));
+
+    // Seleccionar pregunta aleatoria
+    int idx = random.nextInt(preguntas.size());
+    Pregunta p = preguntas.get(idx);
+
+    // Mostrar pregunta
+    String respuesta = JOptionPane.showInputDialog(this, p.getEnunciado());
+
+    if (respuesta != null && respuesta.equalsIgnoreCase(p.getRespuesta())) {
+        jugador.sumarPuntos(10);
+        JOptionPane.showMessageDialog(this, "¡Correcto! +10 puntos");
+    } else {
+        JOptionPane.showMessageDialog(this, "Incorrecto.");
+    }
+}
     
     private void inicializarLabels() {
     jlblCasillas = new javax.swing.JLabel[12];
@@ -43,20 +67,28 @@ public class Principal extends javax.swing.JFrame {
     private void actualizarTablero() {
     // Limpiar todas las casillas
     for (int i = 0; i < jlblCasillas.length; i++) {
-        jlblCasillas[i].setText("Casilla " + i);
+        if (i == 0) {
+            jlblCasillas[i].setText("Inicio");
+        } else {
+            jlblCasillas[i].setText("Casilla " + i);
+        }
     }
 
     // Colocar jugadores
     for (Jugador j : juego.getJugadores()) {
-        String nombre = j.getNombre().equals("Jugador 1") ? "(J1)" : "(J2)";
         int pos = j.getPosicion();
-        jlblCasillas[pos].setText(jlblCasillas[pos].getText() + " " + nombre);
+        String nombre = j.getNombre().equals("Jugador 1") ? "(J1)" : "(J2)";
+        String textoActual = jlblCasillas[pos].getText();
+        jlblCasillas[pos].setText(textoActual + " " + nombre);
     }
 
-    // Actualiza puntos
+    // Actualizar puntajes y comodines
     jlblPuntosJ1.setText("Puntos: " + juego.getJugadores().get(0).getPuntos());
     jlblPuntosJ2.setText("Puntos: " + juego.getJugadores().get(1).getPuntos());
+    jlblComodinJ1.setText("Comodines: " + juego.getJugadores().get(0).getComodines());
+    jlblComodinJ2.setText("Comodines: " + juego.getJugadores().get(1).getComodines());
     }
+    
     
     /**
      * Creates new form asdawd
@@ -64,13 +96,7 @@ public class Principal extends javax.swing.JFrame {
     
 
     private void inicializarJuego() {
-    ArrayList<Jugador> jugadores = new ArrayList<>();
-    jugadores.add(new Jugador("Jugador 1"));
-    jugadores.add(new Jugador("Jugador 2"));
-
-    tablero = new Tablero(); // si no está inicializado antes
-    juego = new Juego(jugadores, tablero);
-
+    juego = new Juego();
     actualizarTablero();
     }
     
@@ -401,29 +427,21 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnTirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTirarActionPerformed
-    int valor = juego.getDado().tirar();
-    jlblNumeroDado.setText(String.valueOf(valor));
+    Jugador jugadorActual = juego.getJugadorActual();
+    int dado = juego.getDado().tirar();
+    jlblNumeroDado.setText("" + dado);
 
-    // Obtiene el jugador actual
-    Jugador actual = juego.getJugadorActual();
+    jugadorActual.mover(dado, jlblCasillas.length);
 
-    // Mueve al jugador
-    actual.mover(valor, tablero.totalCasillas());
-
-    // Obtiene la casilla en la que cayó
-    Casilla casillaActual = tablero.getCasilla(actual.getPosicion());
-
-    // Si quieres preguntas al azar sin importar la casilla:
-    if (casillaActual instanceof Pregunta) {
-        // pregunta real de la casilla
-        casillaActual.accion(actual);
-    } else {
-        // si no es casilla de pregunta, le lanzas una pregunta aleatoria adicional
-        Pregunta preguntaAzar = tablero.getPreguntaAzar();
-        preguntaAzar.accion(actual);
+    // Revisar si cayó en casilla 5 y dar comodín
+    if (jugadorActual.getPosicion() == 5) {
+        jugadorActual.ganarComodin();
+        JOptionPane.showMessageDialog(this, jugadorActual.getNombre() + " ganó un comodín!");
     }
 
-    // Actualiza el tablero y pasa turno
+    // Hacer pregunta en cualquier casilla
+    hacerPregunta(jugadorActual);
+
     actualizarTablero();
     juego.siguienteTurno();
     }//GEN-LAST:event_jbtnTirarActionPerformed
