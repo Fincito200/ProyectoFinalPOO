@@ -33,7 +33,7 @@ public class Principal extends javax.swing.JFrame {
     preguntas.add(new Pregunta("¿2 + 2?", "4"));
     preguntas.add(new Pregunta("¿Color del cielo?", "Azul"));
 
-    // Seleccionar pregunta aleatoria
+    // seleccionar pregunta aleatoria
     int idx = random.nextInt(preguntas.size());
     Pregunta p = preguntas.get(idx);
 
@@ -42,9 +42,9 @@ public class Principal extends javax.swing.JFrame {
 
     if (respuesta != null && respuesta.equalsIgnoreCase(p.getRespuesta())) {
         jugador.sumarPuntos(10);
-        JOptionPane.showMessageDialog(this, "¡Correcto! +10 puntos");
+        JOptionPane.showMessageDialog(this, "Correcto, +10 puntos");
     } else {
-        JOptionPane.showMessageDialog(this, "Incorrecto.");
+        JOptionPane.showMessageDialog(this, "Incorrecto, será para la proxima");
     }
 }
     
@@ -65,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     private void actualizarTablero() {
-    // Limpiar todas las casillas
+    // limpiar todas las casillas
     for (int i = 0; i < jlblCasillas.length; i++) {
         if (i == 0) {
             jlblCasillas[i].setText("Inicio");
@@ -74,7 +74,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    // Colocar jugadores
+    // coloca jugadores
     for (Jugador j : juego.getJugadores()) {
         int pos = j.getPosicion();
         String nombre = j.getNombre().equals("Jugador 1") ? "(J1)" : "(J2)";
@@ -82,7 +82,7 @@ public class Principal extends javax.swing.JFrame {
         jlblCasillas[pos].setText(textoActual + " " + nombre);
     }
 
-    // Actualizar puntajes y comodines
+    // actualizar puntajes y comodines
     jlblPuntosJ1.setText("Puntos: " + juego.getJugadores().get(0).getPuntos());
     jlblPuntosJ2.setText("Puntos: " + juego.getJugadores().get(1).getPuntos());
     jlblComodinJ1.setText("Comodines: " + juego.getJugadores().get(0).getComodines());
@@ -433,13 +433,13 @@ public class Principal extends javax.swing.JFrame {
 
     jugadorActual.mover(dado, jlblCasillas.length);
 
-    // Revisar si cayó en casilla 5 y dar comodín
+    // revisa si cae en casilla 5 y da el comodín
     if (jugadorActual.getPosicion() == 5) {
         jugadorActual.ganarComodin();
-        JOptionPane.showMessageDialog(this, jugadorActual.getNombre() + " ganó un comodín!");
+        JOptionPane.showMessageDialog(this, jugadorActual.getNombre() + " gano un comodin");
     }
 
-    // Hacer pregunta en cualquier casilla
+    // hace pregunta en cualquier casilla
     hacerPregunta(jugadorActual);
 
     actualizarTablero();
