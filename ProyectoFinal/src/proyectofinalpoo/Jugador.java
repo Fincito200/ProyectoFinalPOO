@@ -2,11 +2,13 @@ package proyectofinalpoo;
 
 import java.util.ArrayList;
 
+
 public class Jugador {
     private String nombre;
     private int puntos;
     private int comodines;
     private int posicion;
+    private int fallos = 0;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -43,4 +45,28 @@ public class Jugador {
         return nombre;
     }
     
+    public void usarComodin() {
+        if (comodines > 0) {
+        comodines--;
+        }
+    }
+    
+    public int getFallos() {
+        return fallos;
+    }
+    
+    public void sumarFallo() {
+        this.fallos++;
+    }
+    
+    //aasdasd
+    private ArrayList<RegistroPregunta> historial = new ArrayList<>();
+
+    public void agregarRegistro(RegistroPregunta registro) {
+    historial.add(registro);
+    }
+
+    public ArrayList<RegistroPregunta> getHistorial() {
+    return historial;
+    }
 }

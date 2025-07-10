@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package proyectofinalpoo;
 
 
-import java.util.ArrayList;
+import java.awt.Dimension;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -16,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
+    private String nombreJugador1 = "Jugador1";
+    private String nombreJugador2 = "Jugador2";
     private Juego juego;
     private javax.swing.JLabel[] jlblCasillas;
     private Random random = new Random();
@@ -24,29 +25,11 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         inicializarLabels();
         inicializarJuego();
+        setMinimumSize(new Dimension(1300, 756));
+        setSize(1300, 756);
+        setLocationRelativeTo(null);
     }
     
-    private void hacerPregunta(Jugador jugador) {
-    // Lista de preguntas
-    ArrayList<Pregunta> preguntas = new ArrayList<>();
-    preguntas.add(new Pregunta("¿Capital de Perú?", "Lima"));
-    preguntas.add(new Pregunta("¿2 + 2?", "4"));
-    preguntas.add(new Pregunta("¿Color del cielo?", "Azul"));
-
-    // seleccionar pregunta aleatoria
-    int idx = random.nextInt(preguntas.size());
-    Pregunta p = preguntas.get(idx);
-
-    // Mostrar pregunta
-    String respuesta = JOptionPane.showInputDialog(this, p.getEnunciado());
-
-    if (respuesta != null && respuesta.equalsIgnoreCase(p.getRespuesta())) {
-        jugador.sumarPuntos(10);
-        JOptionPane.showMessageDialog(this, "Correcto, +10 puntos");
-    } else {
-        JOptionPane.showMessageDialog(this, "Incorrecto, será para la proxima");
-    }
-}
     
     private void inicializarLabels() {
     jlblCasillas = new javax.swing.JLabel[12];
@@ -65,7 +48,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     private void actualizarTablero() {
-    // limpiar todas las casillas
+    // limpia todas las casillas
     for (int i = 0; i < jlblCasillas.length; i++) {
         if (i == 0) {
             jlblCasillas[i].setText("Inicio");
@@ -87,18 +70,74 @@ public class Principal extends javax.swing.JFrame {
     jlblPuntosJ2.setText("Puntos: " + juego.getJugadores().get(1).getPuntos());
     jlblComodinJ1.setText("Comodines: " + juego.getJugadores().get(0).getComodines());
     jlblComodinJ2.setText("Comodines: " + juego.getJugadores().get(1).getComodines());
+    
     }
     
-    
-    /**
-     * Creates new form asdawd
-     */
-    
-
     private void inicializarJuego() {
     juego = new Juego();
     actualizarTablero();
     }
+    
+    private void mostrarScore() {
+    // obtiene los jugadores
+    Jugador j1 = juego.getJugadores().get(0);
+    Jugador j2 = juego.getJugadores().get(1);
+    
+    String resultado1 = j1.getNombre() + " puntos: " + j1.getPuntos() + " | Fallos: " + j1.getFallos();
+    String resultado2 = j2.getNombre() + " puntos: " + j2.getPuntos() + " | Fallos: " + j2.getFallos();
+
+    // determinar ganador y perdedor
+    String primero, segundo;
+    if (j1.getPuntos() >= j2.getPuntos()) {
+        primero = "1er Puesto: " + j1.getNombre();
+        segundo = "2do Puesto: " + j2.getNombre();
+    } else {
+        primero = "1er Puesto: " + j2.getNombre();
+        segundo = "2do Puesto: " + j1.getNombre();
+    }
+
+    // actualiza los labels de score
+    jlblResultado1.setText(resultado1);
+    jlblResultado2.setText(resultado2);
+    jlblPuntos1.setText(primero);
+    jlblPuntos2.setText(segundo);
+
+    // Cambiar a la pestaña Score
+    jtblMonopolyPrincipal.setSelectedIndex(3); // Ajusta con el índice de tu pestaña Score
+    
+    //exporta al txt
+    exportarEstadisticas();
+    }
+    
+    //txt
+    private void exportarEstadisticas() {
+    try {
+        FileWriter fw = new FileWriter("Estadisticas.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        for (Jugador j : juego.getJugadores()) {
+            bw.write("=====================================\n");
+            bw.write("Jugador: " + j.getNombre() + "\n");
+            bw.write("Puntaje: " + j.getPuntos() + "\n");
+            bw.write("Fallos: " + j.getFallos() + "\n\n");
+            bw.write(">>> Historial de preguntas:\n");
+
+            for (RegistroPregunta r : j.getHistorial()) {
+                bw.write(r.toString() + "\n");
+            }
+        }
+
+        bw.close();
+        fw.close();
+        JOptionPane.showMessageDialog(null, "Estadísticas exportadas exitosamente en Estadisticas.txt");
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al exportar estadísticas.");
+    }
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,10 +148,13 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtblScore = new javax.swing.JTabbedPane();
+        jtblMonopolyPrincipal = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jtxtJ1 = new javax.swing.JTextField();
+        jtxtJ2 = new javax.swing.JTextField();
+        jbtnNombreConfirma = new javax.swing.JButton();
         jpanelMonopoly = new javax.swing.JPanel();
         jlblInicio = new javax.swing.JLabel();
         jlblCasilla2 = new javax.swing.JLabel();
@@ -137,33 +179,62 @@ public class Principal extends javax.swing.JFrame {
         jlblNumeroDado = new javax.swing.JLabel();
         jbtnTirar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelScore = new javax.swing.JPanel();
+        jlblPuntos1 = new javax.swing.JLabel();
+        jlblResultado1 = new javax.swing.JLabel();
+        jlblPuntos2 = new javax.swing.JLabel();
+        jlblResultado2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("Suma\nResta\nMultiplicacion\nDivision");
+        jTextArea1.setText("El juego consiste en varias preguntas que constaran de unos enciados donde estudiaremos \ntemas importantes como la suma, una operación básica que combina cantidades para obtener \nun total, y la resta, que consiste en encontrar la diferencia entre números. También \naprenderemos sobre la multiplicación, una forma rápida de sumar grupos iguales, y la división, \nque nos ayuda a repartir cantidades en partes equitativas. Además, exploraremos la \nfascinante historia del Perú, desde sus antiguas civilizaciones como los incas hasta su \ndesarrollo en la época colonial y republicana, conociendo sus grandes logros y desafíos. \nPor último, profundizaremos en la geografía peruana, analizando sus tres regiones naturales \ncosta, sierra y selva, sus recursos, climas y las principales ciudades que conforman este \ndiverso país. Estos temas nos darán una base sólida tanto en matemáticas como en el \nconocimiento de nuestro país.");
         jScrollPane1.setViewportView(jTextArea1);
+
+        jtxtJ1.setBorder(javax.swing.BorderFactory.createTitledBorder("Jugador1"));
+
+        jtxtJ2.setBorder(javax.swing.BorderFactory.createTitledBorder("Jugador2"));
+
+        jbtnNombreConfirma.setText("Confirmar");
+        jbtnNombreConfirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnNombreConfirmaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jtxtJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(147, 147, 147)
+                .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(220, 220, 220))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1090, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1072, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
-        jtblScore.addTab("Introduccion", jPanel1);
+        jtblMonopolyPrincipal.addTab("Introduccion", jPanel1);
 
         jpanelMonopoly.setBackground(new java.awt.Color(102, 255, 255));
 
@@ -339,7 +410,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jpanelMonopolyLayout.createSequentialGroup()
                         .addGap(566, 566, 566)
                         .addComponent(jlblNumeroDado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         jpanelMonopolyLayout.setVerticalGroup(
             jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,33 +449,59 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(52, 52, 52))
         );
 
-        jtblScore.addTab("Monopoly", jpanelMonopoly);
+        jtblMonopolyPrincipal.addTab("Monopoly", jpanelMonopoly);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1102, Short.MAX_VALUE)
+            .addGap(0, 1141, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 709, Short.MAX_VALUE)
         );
 
-        jtblScore.addTab("Correccion", jPanel3);
+        jtblMonopolyPrincipal.addTab("Correccion", jPanel3);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1102, Short.MAX_VALUE)
+        jlblPuntos1.setText("Primer Puesto");
+
+        jlblResultado1.setText("GANADOR");
+
+        jlblPuntos2.setText("Segundo Puesto");
+
+        jlblResultado2.setText("jLabel1");
+
+        javax.swing.GroupLayout jPanelScoreLayout = new javax.swing.GroupLayout(jPanelScore);
+        jPanelScore.setLayout(jPanelScoreLayout);
+        jPanelScoreLayout.setHorizontalGroup(
+            jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelScoreLayout.createSequentialGroup()
+                .addGap(277, 277, 277)
+                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jlblPuntos1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(jlblResultado1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblResultado2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+        jPanelScoreLayout.setVerticalGroup(
+            jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelScoreLayout.createSequentialGroup()
+                .addGap(275, 275, 275)
+                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlblPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jlblResultado1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(jlblResultado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
-        jtblScore.addTab("Score", jPanel4);
+        jtblMonopolyPrincipal.addTab("Score", jPanelScore);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -412,14 +509,14 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtblScore, javax.swing.GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+                .addComponent(jtblMonopolyPrincipal)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtblScore)
+                .addComponent(jtblMonopolyPrincipal)
                 .addContainerGap())
         );
 
@@ -427,24 +524,67 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnTirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTirarActionPerformed
-    Jugador jugadorActual = juego.getJugadorActual();
-    int dado = juego.getDado().tirar();
-    jlblNumeroDado.setText("" + dado);
+        Jugador jugadorActual = juego.getJugadorActual();
+        int dado = juego.getDado().tirar();
+        jlblNumeroDado.setText("" + dado);
 
-    jugadorActual.mover(dado, jlblCasillas.length);
+        // mover al jugador
+        jugadorActual.mover(dado, jlblCasillas.length);
 
-    // revisa si cae en casilla 5 y da el comodín
-    if (jugadorActual.getPosicion() == 5) {
-        jugadorActual.ganarComodin();
-        JOptionPane.showMessageDialog(this, jugadorActual.getNombre() + " gano un comodin");
-    }
+        // revisar si cae en casilla 5 y otorgar comodín
+        if (jugadorActual.getPosicion() == 5) {
+            jugadorActual.ganarComodin();
+            JOptionPane.showMessageDialog(this, jugadorActual.getNombre() + " ganó un comodín");
+        }
 
-    // hace pregunta en cualquier casilla
-    hacerPregunta(jugadorActual);
+        // mostrar pregunta
+        boolean quiereUsarComodin = false;
+        if (jugadorActual.getComodines() > 0) {
+            int usar = JOptionPane.showConfirmDialog(this, jugadorActual.getNombre() + " ¿Quieres usar un comodín para saltar la pregunta?", "Usar comodín", JOptionPane.YES_NO_OPTION);
+            if (usar == JOptionPane.YES_OPTION) {
+                jugadorActual.usarComodin();
+                quiereUsarComodin = true;
+                JOptionPane.showMessageDialog(this, "Has usado un comodín. No respondes pregunta esta vez.");
+            }
+        }
 
-    actualizarTablero();
-    juego.siguienteTurno();
+        if (!quiereUsarComodin) {
+            Pregunta.hacerPregunta(this, jugadorActual);
+        }
+
+        actualizarTablero();
+
+        // revisar si algún jugador llegó a 100 puntos y mostrar Score
+        int puntosJ1 = juego.getJugadores().get(0).getPuntos();
+        int puntosJ2 = juego.getJugadores().get(1).getPuntos();
+        if (puntosJ1 >= 100 || puntosJ2 >= 100) {
+            
+            
+            mostrarScore();
+        }
+
+        juego.siguienteTurno();
     }//GEN-LAST:event_jbtnTirarActionPerformed
+
+    private void jbtnNombreConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNombreConfirmaActionPerformed
+        // TODO add your handling code here:
+        String nombre1 = jtxtJ1.getText().trim();
+        String nombre2 = jtxtJ2.getText().trim();
+
+        if (nombre1.isEmpty() || nombre2.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor ingresa ambos nombres.");
+            return;
+        }
+
+        // actualiza los labels con los nombres ingresados en el panel Monopoly
+        jlblJ1.setText(nombre1);
+        jlblJ2.setText(nombre2);
+
+        // deshabilita los campos de texto y el botón para que no se cambie
+        jtxtJ1.setEnabled(false);
+        jtxtJ2.setEnabled(false);
+        jbtnNombreConfirma.setEnabled(false);
+    }//GEN-LAST:event_jbtnNombreConfirmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,9 +627,10 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelScore;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton jbtnNombreConfirma;
     private javax.swing.JButton jbtnTirar;
     private javax.swing.JLabel jlblCasilla10;
     private javax.swing.JLabel jlblCasilla11;
@@ -508,11 +649,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jlblJ1;
     private javax.swing.JLabel jlblJ2;
     private javax.swing.JLabel jlblNumeroDado;
+    private javax.swing.JLabel jlblPuntos1;
+    private javax.swing.JLabel jlblPuntos2;
     private javax.swing.JLabel jlblPuntosJ1;
     private javax.swing.JLabel jlblPuntosJ2;
+    private javax.swing.JLabel jlblResultado1;
+    private javax.swing.JLabel jlblResultado2;
     private javax.swing.JPanel jpanelJ1;
     private javax.swing.JPanel jpanelJ2;
     private javax.swing.JPanel jpanelMonopoly;
-    private javax.swing.JTabbedPane jtblScore;
+    private javax.swing.JTabbedPane jtblMonopolyPrincipal;
+    private javax.swing.JTextField jtxtJ1;
+    private javax.swing.JTextField jtxtJ2;
     // End of variables declaration//GEN-END:variables
 }
