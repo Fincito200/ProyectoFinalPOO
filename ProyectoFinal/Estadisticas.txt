@@ -1,0 +1,100 @@
+=====================================
+Jugador: Jugador 1
+Puntaje: 100
+Fallos: 1
+
+>>> Historial de preguntas:
+Pregunta: ¿Capital de Perú?
+Respuesta dada: Lima
+Respuesta correcta: Lima
+
+Pregunta: ¿Qué tipo de palabra es "correr": sustantivo o verbo?
+Respuesta dada: verbo
+Respuesta correcta: Verbo
+
+Pregunta: ¿Qué planeta es conocido como "el planeta rojo"?
+Respuesta dada: Marte
+Respuesta correcta: Marte
+
+Pregunta: ¿2 + 2?
+Respuesta dada: 4
+Respuesta correcta: 4
+
+Pregunta: ¿Capital de Perú?
+Respuesta dada: lima
+Respuesta correcta: Lima
+
+Pregunta: ¿2 + 2?
+Respuesta dada: 4
+Respuesta correcta: 4
+
+Pregunta: ¿Cuántas sílabas tiene la palabra "árbol"?
+Respuesta dada: 2
+Respuesta correcta: 2
+
+Pregunta: ¿Cuántas sílabas tiene la palabra "árbol"?
+Respuesta dada: 2
+Respuesta correcta: 2
+
+Pregunta: ¿Cuántas sílabas tiene la palabra "árbol"?
+Respuesta dada: 2
+Respuesta correcta: 2
+
+Pregunta: ¿Qué animal pone huevos más grandes: el elefante o el avestruz?
+Respuesta dada: a
+Respuesta correcta: Avestruz
+
+Pregunta: ¿Capital de Perú?
+Respuesta dada: lima
+Respuesta correcta: Lima
+
+=====================================
+Jugador: Jugador 2
+Puntaje: 50
+Fallos: 6
+
+>>> Historial de preguntas:
+Pregunta: ¿Qué tipo de palabra es "correr": sustantivo o verbo?
+Respuesta dada: verbo
+Respuesta correcta: Verbo
+
+Pregunta: ¿Cuántas sílabas tiene la palabra "árbol"?
+Respuesta dada: 2
+Respuesta correcta: 2
+
+Pregunta: ¿Capital de Perú?
+Respuesta dada: lima
+Respuesta correcta: Lima
+
+Pregunta: ¿Capital de Perú?
+Respuesta dada: lima
+Respuesta correcta: Lima
+
+Pregunta: ¿Cuántas sílabas tiene la palabra "árbol"?
+Respuesta dada: 2
+Respuesta correcta: 2
+
+Pregunta: ¿Cuántas sílabas tiene la palabra "árbol"?
+Respuesta dada: 123
+Respuesta correcta: 2
+
+Pregunta: ¿Cuál es el resultado de 6 × 4?
+Respuesta dada: asd
+Respuesta correcta: 24
+
+Pregunta: Si tengo 15 manzanas y regalo 7, ¿cuántas me quedan?
+Respuesta dada: sad
+Respuesta correcta: 8
+
+Pregunta: ¿Qué animal pone huevos más grandes: el elefante o el avestruz?
+Respuesta dada: 
+Respuesta correcta: Avestruz
+
+Pregunta: ¿Qué tipo de palabra es "correr": sustantivo o verbo?
+Respuesta dada: asd
+Respuesta correcta: Verbo
+
+Pregunta: ¿Qué tipo de palabra es "correr": sustantivo o verbo?
+Respuesta dada: 2
+Respuesta correcta: Verbo
+

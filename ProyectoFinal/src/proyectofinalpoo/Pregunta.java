@@ -31,6 +31,13 @@ public class Pregunta {
         preguntas.add(new Pregunta("¿Capital de Perú?", "Lima"));
         preguntas.add(new Pregunta("¿2 + 2?", "4"));
         preguntas.add(new Pregunta("¿Color del cielo?", "Azul"));
+        preguntas.add(new Pregunta("Si tengo 15 manzanas y regalo 7, ¿cuántas me quedan?", "8"));
+        preguntas.add(new Pregunta("¿Cuál es el resultado de 6 × 4?", "24"));
+        preguntas.add(new Pregunta("¿Qué planeta es conocido como \"el planeta rojo\"?", "Marte"));
+        preguntas.add(new Pregunta("¿Cuántas sílabas tiene la palabra \"árbol\"?", "2"));
+        preguntas.add(new Pregunta("¿Qué civilización antigua construyó Machu Picchu?", "Los Incas"));
+        preguntas.add(new Pregunta("¿Qué animal pone huevos más grandes: el elefante o el avestruz?", "Avestruz"));
+        preguntas.add(new Pregunta("¿Qué tipo de palabra es \"correr\": sustantivo o verbo?", "Verbo"));
 
         // selecciona pregunta aleatoria
         int idx = random.nextInt(preguntas.size());

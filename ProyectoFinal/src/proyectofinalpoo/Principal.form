@@ -25,8 +25,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtblMonopolyPrincipal" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jtblMonopolyPrincipal" min="-2" pref="1290" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -34,7 +34,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtblMonopolyPrincipal" max="32767" attributes="0"/>
+              <Component id="jtblMonopolyPrincipal" pref="700" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -61,7 +61,7 @@
         <Container class="javax.swing.JPanel" name="jpanelIntroduccion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="dc" green="f5" red="f5" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -90,7 +90,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="400" max="-2" attributes="0"/>
                       <Component id="jlblTitulo" min="-2" pref="319" max="-2" attributes="0"/>
-                      <EmptySpace pref="402" max="32767" attributes="0"/>
+                      <EmptySpace pref="551" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -102,7 +102,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jlblTitulo" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -130,11 +130,14 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f0" green="ff" red="ff" type="rgb"/>
+                      <Color blue="dc" green="f5" red="f5" type="rgb"/>
                     </Property>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="14" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
@@ -231,57 +234,55 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jlblCasilla11" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jlblCasilla12" alignment="0" pref="291" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jlblInicio" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlblCasilla10" alignment="0" pref="291" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jlblCasilla9" max="32767" attributes="0"/>
+                                          <Component id="jlblCasilla2" pref="291" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jlblCasilla3" pref="291" max="32767" attributes="0"/>
+                                  <Component id="jlblCasilla8" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jlblCasilla4" pref="291" max="32767" attributes="0"/>
+                                  <Component id="jlblCasilla7" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblCasilla6" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblCasilla5" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="331" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Component id="jpanelJ1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jpanelJ2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jlblCasilla10" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jlblInicio" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jlblCasilla11" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jlblCasilla12" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlblCasilla9" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlblCasilla2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlblCasilla3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlblCasilla8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlblCasilla4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlblCasilla5" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlblCasilla7" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jlblCasilla6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                       </Group>
-                      <EmptySpace pref="125" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jbtnTirar" min="-2" pref="87" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="482" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jlblNumeroDado" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="513" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="600" max="-2" attributes="0"/>
+                      <Component id="jbtnTirar" min="-2" pref="87" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="634" max="-2" attributes="0"/>
+                      <Component id="jlblNumeroDado" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -293,34 +294,29 @@
                           <Component id="jpanelJ1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jpanelJ2" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlblCasilla4" alignment="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jlblCasilla3" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Component id="jlblCasilla2" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jlblInicio" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblInicio" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla3" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla4" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla2" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlblCasilla5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlblCasilla12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jlblCasilla11" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jlblCasilla6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jlblCasilla7" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jlblCasilla8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jlblCasilla9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jlblCasilla10" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblCasilla6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla11" alignment="3" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblCasilla10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblCasilla7" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="jlblNumeroDado" min="-2" pref="44" max="-2" attributes="0"/>
@@ -762,17 +758,22 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1121" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1270" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="689" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="645" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
         <Container class="javax.swing.JPanel" name="jpanelScore">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Score">
@@ -797,7 +798,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="177" max="32767" attributes="0"/>
+                      <EmptySpace pref="326" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -814,7 +815,7 @@
                           <Component id="jlblResultado1" alignment="3" min="-2" pref="111" max="-2" attributes="0"/>
                           <Component id="jlblResultado2" alignment="3" min="-2" pref="111" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="310" max="32767" attributes="0"/>
+                      <EmptySpace pref="266" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -822,22 +823,66 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jlblPuntos1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Primer Puesto"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="33" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="1er Puesto: &quot;&quot;"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Puntuaci&#xf3;n"/>
+                  </Border>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblResultado1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="GANADOR"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="33" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Jugador X puntos: &quot;&quot; | Fallos: &quot;&quot;"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Puntuaci&#xf3;n"/>
+                  </Border>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblPuntos2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Segundo Puesto"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="33" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="2do Puesto: &quot;&quot;"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Puntuaci&#xf3;n"/>
+                  </Border>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblResultado2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel1"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="33" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Jugador X puntos: &quot;&quot; | Fallos: &quot;&quot;"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Puntuaci&#xf3;n"/>
+                  </Border>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

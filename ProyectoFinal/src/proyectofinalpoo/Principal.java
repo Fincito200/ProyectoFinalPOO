@@ -26,8 +26,8 @@ public class Principal extends javax.swing.JFrame {
         inicializarLabels();
         inicializarJuego();
         //dimensiones para el centro
-        setMinimumSize(new Dimension(1300, 756));
-        setSize(1300, 756);
+        setMinimumSize(new Dimension(1320, 756));
+        setSize(1320, 710);
         setLocationRelativeTo(null);
     }
     
@@ -50,23 +50,30 @@ public class Principal extends javax.swing.JFrame {
     
     //actualiza las casillas y puntajes y comodines
     private void actualizarTablero() {
-    // limpia todas las casillas
+    // primero limpia las casillas y coloca nombre original correctamente
     for (int i = 0; i < jlblCasillas.length; i++) {
         if (i == 0) {
             jlblCasillas[i].setText("Inicio");
         } else {
-            jlblCasillas[i].setText("Casilla " + i);
+            jlblCasillas[i].setText("Casilla " + (i + 1));
         }
     }
 
     // coloca jugadores
-    for (Jugador j : juego.getJugadores()) {
-        int pos = j.getPosicion();
-        String nombre = j.getNombre().equals("Jugador 1") ? "(J1)" : "(J2)";
-        String textoActual = jlblCasillas[pos].getText();
-        jlblCasillas[pos].setText(textoActual + " " + nombre);
-    }
+    for (Jugador jugador : juego.getJugadores()) {
+        int pos = jugador.getPosicion();
+        String marcador = jugador.getNombre().equals("Jugador 1") ? "J1" : "J2";
 
+        // asegura que la posición no exceda los límites
+        if (pos >= 0 && pos < jlblCasillas.length) {
+            String textoActual = jlblCasillas[pos].getText();
+
+            // si ya tiene J1 o J2, no duplicar, solo agregar si no está
+            if (!textoActual.contains(marcador)) {
+                jlblCasillas[pos].setText(textoActual + "-" + marcador);
+            }
+        }
+    }
     // actualizar puntajes y comodines
     jlblPuntosJ1.setText("Puntos: " + juego.getJugadores().get(0).getPuntos());
     jlblPuntosJ2.setText("Puntos: " + juego.getJugadores().get(1).getPuntos());
@@ -199,12 +206,13 @@ public class Principal extends javax.swing.JFrame {
         jtblMonopolyPrincipal.setForeground(new java.awt.Color(51, 51, 51));
         jtblMonopolyPrincipal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jpanelIntroduccion.setBackground(new java.awt.Color(245, 245, 220));
+        jpanelIntroduccion.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 240));
+        jTextArea1.setBackground(new java.awt.Color(245, 245, 220));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("El juego consiste en varias preguntas que constaran de unos enciados donde estudiaremos temas importantes como la suma, una operación básica que combina cantidades para obtener un total, y la resta, que consiste en encontrar la diferencia entre números. También aprenderemos sobre la multiplicación, una forma rápida de sumar grupos iguales, y la división, que nos ayuda a repartir cantidades en partes equitativas. Además, exploraremos la fascinante historia del Perú, desde sus antiguas civilizaciones como los incas hasta su desarrollo en la época colonial y republicana, conociendo sus grandes logros y desafíos. Por último, profundizaremos en la geografía peruana, analizando sus tres regiones naturales costa, sierra y selva, sus recursos, climas y las principales ciudades que conforman este diverso país. Estos temas nos darán una base sólida tanto en matemáticas como en el conocimiento de nuestro país.");
@@ -251,7 +259,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
                 .addGap(400, 400, 400)
                 .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addContainerGap(551, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelIntroduccionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +268,7 @@ public class Principal extends javax.swing.JFrame {
         jpanelIntroduccionLayout.setVerticalGroup(
             jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -441,44 +449,42 @@ public class Principal extends javax.swing.JFrame {
         jpanelMonopolyLayout.setHorizontalGroup(
             jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelMonopolyLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelMonopolyLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jlblCasilla11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlblCasilla12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                            .addGroup(jpanelMonopolyLayout.createSequentialGroup()
+                                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jlblInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlblCasilla10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jlblCasilla9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlblCasilla2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlblCasilla3, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(jlblCasilla8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlblCasilla4, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(jlblCasilla7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlblCasilla6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlblCasilla5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(331, 331, 331))
+                    .addGroup(jpanelMonopolyLayout.createSequentialGroup()
                         .addComponent(jpanelJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpanelJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpanelMonopolyLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlblCasilla10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlblInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlblCasilla11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jlblCasilla12))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlblCasilla9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblCasilla3)
-                            .addComponent(jlblCasilla8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlblCasilla4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla6))))
-                .addContainerGap(125, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelMonopolyLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelMonopolyLayout.createSequentialGroup()
-                        .addComponent(jbtnTirar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(482, 482, 482))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelMonopolyLayout.createSequentialGroup()
-                        .addComponent(jlblNumeroDado)
-                        .addGap(513, 513, 513))))
+                        .addComponent(jpanelJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jpanelMonopolyLayout.createSequentialGroup()
+                .addGap(600, 600, 600)
+                .addComponent(jbtnTirar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jpanelMonopolyLayout.createSequentialGroup()
+                .addGap(634, 634, 634)
+                .addComponent(jlblNumeroDado))
         );
         jpanelMonopolyLayout.setVerticalGroup(
             jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,29 +493,26 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpanelJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanelJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpanelMonopolyLayout.createSequentialGroup()
-                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlblCasilla4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlblCasilla2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6))
-                    .addComponent(jlblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblCasilla3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblCasilla4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblCasilla2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblCasilla5)
-                    .addComponent(jlblCasilla12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblCasilla11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlblCasilla6))
+                    .addComponent(jlblCasilla12)
+                    .addComponent(jlblCasilla5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblCasilla7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlblCasilla8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlblCasilla9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlblCasilla10))
+                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblCasilla6)
+                    .addComponent(jlblCasilla11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblCasilla10)
+                    .addComponent(jlblCasilla9)
+                    .addComponent(jlblCasilla8)
+                    .addComponent(jlblCasilla7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24)
                 .addComponent(jlblNumeroDado, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -523,22 +526,36 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1121, Short.MAX_VALUE)
+            .addGap(0, 1270, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
+            .addGap(0, 645, Short.MAX_VALUE)
         );
 
         jtblMonopolyPrincipal.addTab("Correccion", jPanel3);
 
-        jlblPuntos1.setText("Primer Puesto");
+        jpanelScore.setBackground(new java.awt.Color(255, 255, 255));
 
-        jlblResultado1.setText("GANADOR");
+        jlblPuntos1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlblPuntos1.setForeground(new java.awt.Color(0, 51, 102));
+        jlblPuntos1.setText("1er Puesto: \"\"");
+        jlblPuntos1.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntuación"));
 
-        jlblPuntos2.setText("Segundo Puesto");
+        jlblResultado1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlblResultado1.setForeground(new java.awt.Color(0, 51, 102));
+        jlblResultado1.setText("Jugador X puntos: \"\" | Fallos: \"\"");
+        jlblResultado1.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntuación"));
 
-        jlblResultado2.setText("jLabel1");
+        jlblPuntos2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlblPuntos2.setForeground(new java.awt.Color(0, 51, 102));
+        jlblPuntos2.setText("2do Puesto: \"\"");
+        jlblPuntos2.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntuación"));
+
+        jlblResultado2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jlblResultado2.setForeground(new java.awt.Color(0, 51, 102));
+        jlblResultado2.setText("Jugador X puntos: \"\" | Fallos: \"\"");
+        jlblResultado2.setBorder(javax.swing.BorderFactory.createTitledBorder("Puntuación"));
 
         javax.swing.GroupLayout jpanelScoreLayout = new javax.swing.GroupLayout(jpanelScore);
         jpanelScore.setLayout(jpanelScoreLayout);
@@ -554,7 +571,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblResultado2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jpanelScoreLayout.setVerticalGroup(
             jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,7 +584,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblResultado2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         jtblMonopolyPrincipal.addTab("Score", jpanelScore);
@@ -578,19 +595,40 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtblMonopolyPrincipal)
-                .addContainerGap())
+                .addComponent(jtblMonopolyPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtblMonopolyPrincipal)
+                .addComponent(jtblMonopolyPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 700, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnNombreConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNombreConfirmaActionPerformed
+        // TODO add your handling code here:
+        String nombre1 = jtxtJ1.getText().trim();
+        String nombre2 = jtxtJ2.getText().trim();
+        
+        //si no se coloca nombre en los jugadores
+        if (nombre1.isEmpty() || nombre2.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor ingresa ambos nombres.");
+            return;
+        }
+
+        // actualiza los labels con los nombres ingresados en el panel monopoly
+        jlblJ1.setText(nombre1);
+        jlblJ2.setText(nombre2);
+
+        // deshabilita los campos de texto y el botón para que no se cambie para que no salga errores
+        jtxtJ1.setEnabled(false);
+        jtxtJ2.setEnabled(false);
+        jbtnNombreConfirma.setEnabled(false);
+    }//GEN-LAST:event_jbtnNombreConfirmaActionPerformed
 
     private void jbtnTirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTirarActionPerformed
         Jugador jugadorActual = juego.getJugadorActual();
@@ -620,41 +658,19 @@ public class Principal extends javax.swing.JFrame {
         if (!quiereUsarComodin) {
             Pregunta.hacerPregunta(this, jugadorActual);
         }
-        
+
         actualizarTablero();
 
         // revisar si algún jugador llegó a 100 puntos y lleva al Score
         int puntosJ1 = juego.getJugadores().get(0).getPuntos();
         int puntosJ2 = juego.getJugadores().get(1).getPuntos();
         if (puntosJ1 >= 100 || puntosJ2 >= 100) {
-            
-            
+
             mostrarScore();
         }
 
         juego.siguienteTurno();
     }//GEN-LAST:event_jbtnTirarActionPerformed
-
-    private void jbtnNombreConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNombreConfirmaActionPerformed
-        // TODO add your handling code here:
-        String nombre1 = jtxtJ1.getText().trim();
-        String nombre2 = jtxtJ2.getText().trim();
-        
-        //si no se coloca nombre en los jugadores
-        if (nombre1.isEmpty() || nombre2.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor ingresa ambos nombres.");
-            return;
-        }
-
-        // actualiza los labels con los nombres ingresados en el panel monopoly
-        jlblJ1.setText(nombre1);
-        jlblJ2.setText(nombre2);
-
-        // deshabilita los campos de texto y el botón para que no se cambie para que no salga errores
-        jtxtJ1.setEnabled(false);
-        jtxtJ2.setEnabled(false);
-        jbtnNombreConfirma.setEnabled(false);
-    }//GEN-LAST:event_jbtnNombreConfirmaActionPerformed
 
     /**
      * @param args the command line arguments
