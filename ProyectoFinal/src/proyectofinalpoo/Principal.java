@@ -25,12 +25,13 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         inicializarLabels();
         inicializarJuego();
+        //dimensiones para el centro
         setMinimumSize(new Dimension(1300, 756));
         setSize(1300, 756);
         setLocationRelativeTo(null);
     }
     
-    
+    //casillas
     private void inicializarLabels() {
     jlblCasillas = new javax.swing.JLabel[12];
     jlblCasillas[0] = jlblInicio;
@@ -47,6 +48,7 @@ public class Principal extends javax.swing.JFrame {
     jlblCasillas[11] = jlblCasilla12;
     }
     
+    //actualiza las casillas y puntajes y comodines
     private void actualizarTablero() {
     // limpia todas las casillas
     for (int i = 0; i < jlblCasillas.length; i++) {
@@ -73,20 +75,23 @@ public class Principal extends javax.swing.JFrame {
     
     }
     
+    //incia y actualiza
     private void inicializarJuego() {
     juego = new Juego();
     actualizarTablero();
     }
     
+    //muestra el escore cuando llega a 100+
     private void mostrarScore() {
     // obtiene los jugadores
     Jugador j1 = juego.getJugadores().get(0);
     Jugador j2 = juego.getJugadores().get(1);
     
+    //crea el resultado
     String resultado1 = j1.getNombre() + " puntos: " + j1.getPuntos() + " | Fallos: " + j1.getFallos();
     String resultado2 = j2.getNombre() + " puntos: " + j2.getPuntos() + " | Fallos: " + j2.getFallos();
 
-    // determinar ganador y perdedor
+    // determina ganador y perdedor
     String primero, segundo;
     if (j1.getPuntos() >= j2.getPuntos()) {
         primero = "1er Puesto: " + j1.getNombre();
@@ -102,15 +107,16 @@ public class Principal extends javax.swing.JFrame {
     jlblPuntos1.setText(primero);
     jlblPuntos2.setText(segundo);
 
-    // Cambiar a la pestaña Score
+    // Cambiar a la pestaña Score cuando termine la partida
     jtblMonopolyPrincipal.setSelectedIndex(3); // Ajusta con el índice de tu pestaña Score
     
     //exporta al txt
     exportarEstadisticas();
     }
     
-    //txt
+    //txt creado
     private void exportarEstadisticas() {
+        //crea el archivo con las estadisticas
     try {
         FileWriter fw = new FileWriter("Estadisticas.txt");
         BufferedWriter bw = new BufferedWriter(fw);
@@ -121,7 +127,7 @@ public class Principal extends javax.swing.JFrame {
             bw.write("Puntaje: " + j.getPuntos() + "\n");
             bw.write("Fallos: " + j.getFallos() + "\n\n");
             bw.write(">>> Historial de preguntas:\n");
-
+            
             for (RegistroPregunta r : j.getHistorial()) {
                 bw.write(r.toString() + "\n");
             }
@@ -129,8 +135,9 @@ public class Principal extends javax.swing.JFrame {
 
         bw.close();
         fw.close();
+        //confirma la creacion
         JOptionPane.showMessageDialog(null, "Estadísticas exportadas exitosamente en Estadisticas.txt");
-
+        //sistema de error
     } catch (IOException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(null, "Error al exportar estadísticas.");
@@ -149,24 +156,25 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jtblMonopolyPrincipal = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jpanelIntroduccion = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jtxtJ1 = new javax.swing.JTextField();
         jtxtJ2 = new javax.swing.JTextField();
         jbtnNombreConfirma = new javax.swing.JButton();
+        jlblTitulo = new javax.swing.JLabel();
         jpanelMonopoly = new javax.swing.JPanel();
         jlblInicio = new javax.swing.JLabel();
+        jlblCasilla12 = new javax.swing.JLabel();
         jlblCasilla2 = new javax.swing.JLabel();
         jlblCasilla3 = new javax.swing.JLabel();
         jlblCasilla4 = new javax.swing.JLabel();
         jlblCasilla5 = new javax.swing.JLabel();
         jlblCasilla6 = new javax.swing.JLabel();
+        jlblCasilla7 = new javax.swing.JLabel();
         jlblCasilla8 = new javax.swing.JLabel();
         jlblCasilla9 = new javax.swing.JLabel();
         jlblCasilla10 = new javax.swing.JLabel();
-        jlblCasilla7 = new javax.swing.JLabel();
-        jlblCasilla12 = new javax.swing.JLabel();
         jlblCasilla11 = new javax.swing.JLabel();
         jpanelJ1 = new javax.swing.JPanel();
         jlblJ1 = new javax.swing.JLabel();
@@ -179,7 +187,7 @@ public class Principal extends javax.swing.JFrame {
         jlblNumeroDado = new javax.swing.JLabel();
         jbtnTirar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanelScore = new javax.swing.JPanel();
+        jpanelScore = new javax.swing.JPanel();
         jlblPuntos1 = new javax.swing.JLabel();
         jlblResultado1 = new javax.swing.JLabel();
         jlblPuntos2 = new javax.swing.JLabel();
@@ -187,108 +195,163 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jtblMonopolyPrincipal.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jtblMonopolyPrincipal.setForeground(new java.awt.Color(51, 51, 51));
+        jtblMonopolyPrincipal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jpanelIntroduccion.setBackground(new java.awt.Color(245, 245, 220));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(255, 255, 240));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("El juego consiste en varias preguntas que constaran de unos enciados donde estudiaremos \ntemas importantes como la suma, una operación básica que combina cantidades para obtener \nun total, y la resta, que consiste en encontrar la diferencia entre números. También \naprenderemos sobre la multiplicación, una forma rápida de sumar grupos iguales, y la división, \nque nos ayuda a repartir cantidades en partes equitativas. Además, exploraremos la \nfascinante historia del Perú, desde sus antiguas civilizaciones como los incas hasta su \ndesarrollo en la época colonial y republicana, conociendo sus grandes logros y desafíos. \nPor último, profundizaremos en la geografía peruana, analizando sus tres regiones naturales \ncosta, sierra y selva, sus recursos, climas y las principales ciudades que conforman este \ndiverso país. Estos temas nos darán una base sólida tanto en matemáticas como en el \nconocimiento de nuestro país.");
+        jTextArea1.setText("El juego consiste en varias preguntas que constaran de unos enciados donde estudiaremos temas importantes como la suma, una operación básica que combina cantidades para obtener un total, y la resta, que consiste en encontrar la diferencia entre números. También aprenderemos sobre la multiplicación, una forma rápida de sumar grupos iguales, y la división, que nos ayuda a repartir cantidades en partes equitativas. Además, exploraremos la fascinante historia del Perú, desde sus antiguas civilizaciones como los incas hasta su desarrollo en la época colonial y republicana, conociendo sus grandes logros y desafíos. Por último, profundizaremos en la geografía peruana, analizando sus tres regiones naturales costa, sierra y selva, sus recursos, climas y las principales ciudades que conforman este diverso país. Estos temas nos darán una base sólida tanto en matemáticas como en el conocimiento de nuestro país.");
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jtxtJ1.setBackground(new java.awt.Color(255, 255, 255));
+        jtxtJ1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtJ1.setBorder(javax.swing.BorderFactory.createTitledBorder("Jugador1"));
 
+        jtxtJ2.setBackground(new java.awt.Color(255, 255, 255));
+        jtxtJ2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtJ2.setBorder(javax.swing.BorderFactory.createTitledBorder("Jugador2"));
 
-        jbtnNombreConfirma.setText("Confirmar");
+        jbtnNombreConfirma.setBackground(new java.awt.Color(76, 175, 80));
+        jbtnNombreConfirma.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbtnNombreConfirma.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnNombreConfirma.setText("Confirmar Jugadores");
+        jbtnNombreConfirma.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
         jbtnNombreConfirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnNombreConfirmaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(127, 127, 127)
+        jlblTitulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblTitulo.setForeground(new java.awt.Color(0, 100, 0));
+        jlblTitulo.setText("¡Aprende con Monopoly Educativo!");
+
+        javax.swing.GroupLayout jpanelIntroduccionLayout = new javax.swing.GroupLayout(jpanelIntroduccion);
+        jpanelIntroduccion.setLayout(jpanelIntroduccionLayout);
+        jpanelIntroduccionLayout.setHorizontalGroup(
+            jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelIntroduccionLayout.createSequentialGroup()
+                .addGap(191, 191, 191)
                 .addComponent(jtxtJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147)
-                .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(220, 220, 220))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1072, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(402, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelIntroduccionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(447, 447, 447))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jpanelIntroduccionLayout.setVerticalGroup(
+            jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
-        jtblMonopolyPrincipal.addTab("Introduccion", jPanel1);
+        jtblMonopolyPrincipal.addTab("Introduccion", jpanelIntroduccion);
 
-        jpanelMonopoly.setBackground(new java.awt.Color(102, 255, 255));
+        jpanelMonopoly.setBackground(new java.awt.Color(245, 245, 245));
+        jpanelMonopoly.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jlblInicio.setBackground(new java.awt.Color(255, 153, 0));
+        jlblInicio.setBackground(new java.awt.Color(255, 249, 196));
         jlblInicio.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
         jlblInicio.setForeground(new java.awt.Color(255, 153, 102));
         jlblInicio.setText("Inicio");
+        jlblInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(46, 139, 87), 2, true));
 
-        jlblCasilla2.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla2.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla2.setText("Casilla 2");
-
-        jlblCasilla3.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla3.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla3.setText("Casilla 3");
-
-        jlblCasilla4.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla4.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla4.setText("Casilla 4");
-
-        jlblCasilla5.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla5.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla5.setText("Casilla 5");
-
-        jlblCasilla6.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla6.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla6.setText("Casilla 6");
-
-        jlblCasilla8.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla8.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla8.setText("Casilla 8");
-
-        jlblCasilla9.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla9.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla9.setText("Casill 9");
-
-        jlblCasilla10.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla10.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla10.setText("Casilla 10");
-
-        jlblCasilla7.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
-        jlblCasilla7.setForeground(new java.awt.Color(255, 153, 102));
-        jlblCasilla7.setText("Casilla 7");
-
+        jlblCasilla12.setBackground(new java.awt.Color(255, 249, 196));
         jlblCasilla12.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
         jlblCasilla12.setForeground(new java.awt.Color(255, 153, 102));
         jlblCasilla12.setText("Casilla 12");
+        jlblCasilla12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
 
+        jlblCasilla2.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla2.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla2.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla2.setText("Casilla 2");
+        jlblCasilla2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla3.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla3.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla3.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla3.setText("Casilla 3");
+        jlblCasilla3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla4.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla4.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla4.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla4.setText("Casilla 4");
+        jlblCasilla4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla5.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla5.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla5.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla5.setText("Casilla 5");
+        jlblCasilla5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla6.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla6.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla6.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla6.setText("Casilla 6");
+        jlblCasilla6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla7.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla7.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla7.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla7.setText("Casilla 7");
+        jlblCasilla7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla8.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla8.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla8.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla8.setText("Casilla 8");
+        jlblCasilla8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla9.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla9.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla9.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla9.setText("Casill 9");
+        jlblCasilla9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla10.setBackground(new java.awt.Color(255, 249, 196));
+        jlblCasilla10.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
+        jlblCasilla10.setForeground(new java.awt.Color(255, 153, 102));
+        jlblCasilla10.setText("Casilla 10");
+        jlblCasilla10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
+
+        jlblCasilla11.setBackground(new java.awt.Color(255, 249, 196));
         jlblCasilla11.setFont(new java.awt.Font("Comic Sans MS", 0, 48)); // NOI18N
         jlblCasilla11.setForeground(new java.awt.Color(255, 153, 102));
         jlblCasilla11.setText("Casilla 11");
+        jlblCasilla11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(46, 139, 87), 2));
 
-        jpanelJ1.setBackground(new java.awt.Color(102, 255, 255));
-        jpanelJ1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.orange, java.awt.Color.orange, java.awt.Color.orange, java.awt.Color.orange));
+        jpanelJ1.setBackground(new java.awt.Color(227, 242, 253));
+        jpanelJ1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jlblJ1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jlblJ1.setForeground(new java.awt.Color(255, 82, 82));
@@ -324,8 +387,8 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpanelJ2.setBackground(new java.awt.Color(102, 255, 255));
-        jpanelJ2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.orange, java.awt.Color.orange, java.awt.Color.orange, java.awt.Color.orange));
+        jpanelJ2.setBackground(new java.awt.Color(255, 235, 238));
+        jpanelJ2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jlblJ2.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jlblJ2.setForeground(new java.awt.Color(68, 138, 255));
@@ -360,11 +423,12 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jlblComodinJ2))
         );
 
-        jlblNumeroDado.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        jlblNumeroDado.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jlblNumeroDado.setText("1");
 
-        jbtnTirar.setBackground(new java.awt.Color(118, 255, 3));
-        jbtnTirar.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jbtnTirar.setBackground(new java.awt.Color(33, 150, 243));
+        jbtnTirar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbtnTirar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnTirar.setText("Tirar");
         jbtnTirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,20 +443,18 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jpanelMonopolyLayout.createSequentialGroup()
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelMonopolyLayout.createSequentialGroup()
-                        .addGap(541, 541, 541)
-                        .addComponent(jbtnTirar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpanelMonopolyLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jpanelJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpanelJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpanelMonopolyLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
-                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlblCasilla10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla11))
+                        .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jlblCasilla10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlblInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlblCasilla11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jlblCasilla12))
                         .addGap(18, 18, 18)
                         .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlblCasilla9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -406,11 +468,17 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jlblCasilla4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlblCasilla5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlblCasilla7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblCasilla6)))
-                    .addGroup(jpanelMonopolyLayout.createSequentialGroup()
-                        .addGap(566, 566, 566)
-                        .addComponent(jlblNumeroDado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(163, Short.MAX_VALUE))
+                            .addComponent(jlblCasilla6))))
+                .addContainerGap(125, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelMonopolyLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelMonopolyLayout.createSequentialGroup()
+                        .addComponent(jbtnTirar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(482, 482, 482))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelMonopolyLayout.createSequentialGroup()
+                        .addComponent(jlblNumeroDado)
+                        .addGap(513, 513, 513))))
         );
         jpanelMonopolyLayout.setVerticalGroup(
             jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,7 +487,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpanelJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanelJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpanelMonopolyLayout.createSequentialGroup()
                         .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -429,9 +497,9 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(6, 6, 6))
                     .addComponent(jlblInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblCasilla12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlblCasilla5))
+                .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblCasilla5)
+                    .addComponent(jlblCasilla12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpanelMonopolyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblCasilla11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -442,9 +510,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jlblCasilla8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlblCasilla9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlblCasilla10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addComponent(jlblNumeroDado, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnTirar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
@@ -455,11 +523,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1141, Short.MAX_VALUE)
+            .addGap(0, 1121, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+            .addGap(0, 689, Short.MAX_VALUE)
         );
 
         jtblMonopolyPrincipal.addTab("Correccion", jPanel3);
@@ -472,36 +540,37 @@ public class Principal extends javax.swing.JFrame {
 
         jlblResultado2.setText("jLabel1");
 
-        javax.swing.GroupLayout jPanelScoreLayout = new javax.swing.GroupLayout(jPanelScore);
-        jPanelScore.setLayout(jPanelScoreLayout);
-        jPanelScoreLayout.setHorizontalGroup(
-            jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelScoreLayout.createSequentialGroup()
-                .addGap(277, 277, 277)
-                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblPuntos1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(jlblResultado1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(67, 67, 67)
-                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlblResultado2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
-        );
-        jPanelScoreLayout.setVerticalGroup(
-            jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelScoreLayout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlblPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblResultado1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                    .addComponent(jlblResultado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout jpanelScoreLayout = new javax.swing.GroupLayout(jpanelScore);
+        jpanelScore.setLayout(jpanelScoreLayout);
+        jpanelScoreLayout.setHorizontalGroup(
+            jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelScoreLayout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addGroup(jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpanelScoreLayout.createSequentialGroup()
+                        .addComponent(jlblPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112)
+                        .addGroup(jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlblResultado2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(177, Short.MAX_VALUE))
         );
+        jpanelScoreLayout.setVerticalGroup(
+            jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelScoreLayout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addGroup(jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblPuntos1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblPuntos2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jpanelScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblResultado2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(310, Short.MAX_VALUE))
+        );
 
-        jtblMonopolyPrincipal.addTab("Score", jPanelScore);
+        jtblMonopolyPrincipal.addTab("Score", jpanelScore);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -528,16 +597,16 @@ public class Principal extends javax.swing.JFrame {
         int dado = juego.getDado().tirar();
         jlblNumeroDado.setText("" + dado);
 
-        // mover al jugador
+        // mover al jugador la casilla dependiendo del dado
         jugadorActual.mover(dado, jlblCasillas.length);
 
-        // revisar si cae en casilla 5 y otorgar comodín
+        // revisar si cae en casilla 5 y otorgar el comodín
         if (jugadorActual.getPosicion() == 5) {
             jugadorActual.ganarComodin();
             JOptionPane.showMessageDialog(this, jugadorActual.getNombre() + " ganó un comodín");
         }
 
-        // mostrar pregunta
+        // mostrar pregunta del comodin
         boolean quiereUsarComodin = false;
         if (jugadorActual.getComodines() > 0) {
             int usar = JOptionPane.showConfirmDialog(this, jugadorActual.getNombre() + " ¿Quieres usar un comodín para saltar la pregunta?", "Usar comodín", JOptionPane.YES_NO_OPTION);
@@ -547,14 +616,14 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Has usado un comodín. No respondes pregunta esta vez.");
             }
         }
-
+        //si dice que no realiza la pregunta con normalidad
         if (!quiereUsarComodin) {
             Pregunta.hacerPregunta(this, jugadorActual);
         }
-
+        
         actualizarTablero();
 
-        // revisar si algún jugador llegó a 100 puntos y mostrar Score
+        // revisar si algún jugador llegó a 100 puntos y lleva al Score
         int puntosJ1 = juego.getJugadores().get(0).getPuntos();
         int puntosJ2 = juego.getJugadores().get(1).getPuntos();
         if (puntosJ1 >= 100 || puntosJ2 >= 100) {
@@ -570,17 +639,18 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nombre1 = jtxtJ1.getText().trim();
         String nombre2 = jtxtJ2.getText().trim();
-
+        
+        //si no se coloca nombre en los jugadores
         if (nombre1.isEmpty() || nombre2.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor ingresa ambos nombres.");
             return;
         }
 
-        // actualiza los labels con los nombres ingresados en el panel Monopoly
+        // actualiza los labels con los nombres ingresados en el panel monopoly
         jlblJ1.setText(nombre1);
         jlblJ2.setText(nombre2);
 
-        // deshabilita los campos de texto y el botón para que no se cambie
+        // deshabilita los campos de texto y el botón para que no se cambie para que no salga errores
         jtxtJ1.setEnabled(false);
         jtxtJ2.setEnabled(false);
         jbtnNombreConfirma.setEnabled(false);
@@ -625,9 +695,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanelScore;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jbtnNombreConfirma;
@@ -655,9 +723,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jlblPuntosJ2;
     private javax.swing.JLabel jlblResultado1;
     private javax.swing.JLabel jlblResultado2;
+    private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JPanel jpanelIntroduccion;
     private javax.swing.JPanel jpanelJ1;
     private javax.swing.JPanel jpanelJ2;
     private javax.swing.JPanel jpanelMonopoly;
+    private javax.swing.JPanel jpanelScore;
     private javax.swing.JTabbedPane jtblMonopolyPrincipal;
     private javax.swing.JTextField jtxtJ1;
     private javax.swing.JTextField jtxtJ2;

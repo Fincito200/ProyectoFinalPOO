@@ -26,23 +26,23 @@ public class Pregunta {
     public static void hacerPregunta(javax.swing.JFrame parent, Jugador jugador) {
         Random random = new Random();
 
-        // Lista de preguntas (podrias cargarlas desde archivo o base de datos en un futuro)
+        // lista de preguntas
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(new Pregunta("¿Capital de Perú?", "Lima"));
         preguntas.add(new Pregunta("¿2 + 2?", "4"));
         preguntas.add(new Pregunta("¿Color del cielo?", "Azul"));
 
-        // seleccionar pregunta aleatoria
+        // selecciona pregunta aleatoria
         int idx = random.nextInt(preguntas.size());
         Pregunta p = preguntas.get(idx);
 
-        // muestra pregunta
+        // muestra la pregunta
         String respuesta = JOptionPane.showInputDialog(parent, p.getEnunciado());
-        //lina 42 recien agregada
+        //para el txt
         String respuestaJugador = (respuesta != null) ? respuesta : "Sin respuesta";
         
         
-        // su es si agrega puntaje
+        // si es si agrega puntaje
         if (respuesta != null && respuesta.equalsIgnoreCase(p.getRespuesta())) {
             jugador.sumarPuntos(10);
             JOptionPane.showMessageDialog(parent, "Correcto, +10 puntos");
@@ -51,7 +51,7 @@ public class Pregunta {
             jugador.sumarFallo();
             JOptionPane.showMessageDialog(parent, "Incorrecto, será para la proxima");
         }
-        //lina 55 recien agregada
+        //para el txt
         jugador.agregarRegistro(new RegistroPregunta(p.getEnunciado(), respuestaJugador, p.getRespuesta()));
         
     }

@@ -8,14 +8,15 @@ public class Juego {
     private int turnoActual;
     private Dado dado;
     private Tablero tablero;
-
+    
+    //Jugadores
     public Juego() {
         jugadores = new ArrayList<>();
         jugadores.add(new Jugador("Jugador 1"));
         jugadores.add(new Jugador("Jugador 2"));
         turnoActual = 0;
         dado = new Dado();
-        tablero = new Tablero(); // ✅ inicialización de Tablero
+        tablero = new Tablero();
     }
 
     public Casilla getCasillaActual(Jugador jugador) {

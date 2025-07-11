@@ -9,6 +9,7 @@ public class RegistroPregunta {
     private String respuestaJugador;
     private String respuestaCorrecta;
 
+    //constructor
     public RegistroPregunta(String pregunta, String respuestaJugador, String respuestaCorrecta) {
         this.pregunta = pregunta;
         this.respuestaJugador = respuestaJugador;

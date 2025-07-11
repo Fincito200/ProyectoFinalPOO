@@ -6,7 +6,7 @@ package proyectofinalpoo;
  */
 public class Casilla {
     private String nombre;
-    private String tipo; // inicio, pregunta, comodin, propiedad
+    private String tipo; 
     private Comodin comodin;
     private Propiedad propiedad;
 

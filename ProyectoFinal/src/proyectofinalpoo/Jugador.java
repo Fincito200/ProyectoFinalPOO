@@ -59,7 +59,7 @@ public class Jugador {
         this.fallos++;
     }
     
-    //aasdasd
+    //Para el txt
     private ArrayList<RegistroPregunta> historial = new ArrayList<>();
 
     public void agregarRegistro(RegistroPregunta registro) {
