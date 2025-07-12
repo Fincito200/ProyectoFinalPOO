@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -20,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
     private Juego juego;
     private javax.swing.JLabel[] jlblCasillas;
     private Random random = new Random();
+    private ArrayList<Jugador> jugadores;
     
     public Principal() {
         initComponents();
@@ -48,9 +50,14 @@ public class Principal extends javax.swing.JFrame {
     jlblCasillas[11] = jlblCasilla12;
     }
     
-    //prueba
+    //para el panel de correccion
     public void actualizarErrores(String texto) {
-    jtxtErroresCorrecion.setText(texto);
+        jtxtErroresCorrecion.setText(texto);
+    }
+    
+    //panel de correcciones
+    public void agregarErrores(String texto) {
+    jtxtErroresCorrecion.append(texto);
     }
     
     //actualiza las casillas y puntajes y comodines
@@ -259,18 +266,19 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(220, 220, 220))
-            .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(551, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelIntroduccionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(447, 447, 447))
+            .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
+                .addGroup(jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
+                        .addGap(400, 400, 400)
+                        .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpanelIntroduccionLayout.createSequentialGroup()
+                        .addGap(411, 411, 411)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
         jpanelIntroduccionLayout.setVerticalGroup(
             jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,9 +289,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jpanelIntroduccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(63, 63, 63)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
                 .addComponent(jbtnNombreConfirma, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -678,7 +686,7 @@ public class Principal extends javax.swing.JFrame {
         }
         //si dice que no realiza la pregunta con normalidad
         if (!quiereUsarComodin) {
-            Pregunta.hacerPregunta(this, jugadorActual,this);
+            Pregunta.hacerPregunta(this, jugadorActual,jugadores, this);
         }
 
         actualizarTablero();

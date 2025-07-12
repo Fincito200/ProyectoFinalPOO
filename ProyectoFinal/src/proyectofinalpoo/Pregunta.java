@@ -23,7 +23,7 @@ public class Pregunta {
         return respuesta;
     }
 
-    public static void hacerPregunta(javax.swing.JFrame parent, Jugador jugador,Principal principal) {
+    public static void hacerPregunta(javax.swing.JFrame parent, Jugador jugador, ArrayList<Jugador> jugadores, Principal principal) {
         Random random = new Random();
 
         // lista de preguntas
@@ -59,18 +59,17 @@ public class Pregunta {
         //para el txt
         jugador.agregarRegistro(new RegistroPregunta(p.getEnunciado(), respuestaJugador, p.getRespuesta()));
         
-        //prueba
+        //correccion para el panel
         StringBuilder errores = new StringBuilder();
-for (RegistroPregunta registro : jugador.getHistorial()) {
-    if (!registro.getRespuestaJugador().equalsIgnoreCase(registro.getRespuestaCorrecta())) {
+        for (RegistroPregunta registro : jugador.getHistorial()) {
+        if (!registro.getRespuestaJugador().equalsIgnoreCase(registro.getRespuestaCorrecta())) {
         errores.append("Jugador: ").append(jugador.getNombre()).append("\n")
                .append("Pregunta: ").append(registro.getPregunta()).append("\n")
                .append("Respuesta dada: ").append(registro.getRespuestaJugador()).append("\n")
                .append("Respuesta correcta: ").append(registro.getRespuestaCorrecta()).append("\n")
                .append("===================\n");
     }
-        principal.actualizarErrores(errores.toString());
-    //Fin prueba
     }
-}
+        principal.agregarErrores(errores.toString());
+    }
 }
