@@ -21,4 +21,16 @@ public class RegistroPregunta {
                "\nRespuesta dada: " + respuestaJugador +
                "\nRespuesta correcta: " + respuestaCorrecta + "\n";
     }
+    //prueba
+    public String getRespuestaJugador() {
+    return respuestaJugador;
+}
+
+    public String getRespuestaCorrecta() {
+    return respuestaCorrecta;
+    }
+    
+    public String getPregunta() {
+    return pregunta;
+}
 }

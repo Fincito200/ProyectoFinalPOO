@@ -48,6 +48,11 @@ public class Principal extends javax.swing.JFrame {
     jlblCasillas[11] = jlblCasilla12;
     }
     
+    //prueba
+    public void actualizarErrores(String texto) {
+    jtxtErroresCorrecion.setText(texto);
+    }
+    
     //actualiza las casillas y puntajes y comodines
     private void actualizarTablero() {
     // primero limpia las casillas y coloca nombre original correctamente
@@ -196,7 +201,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jpanelCorrecion = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jtxtErroresCorreccion = new javax.swing.JTextArea();
+        jtxtErroresCorrecion = new javax.swing.JTextArea();
         jpanelScore = new javax.swing.JPanel();
         jlblPuntos1 = new javax.swing.JLabel();
         jlblResultado1 = new javax.swing.JLabel();
@@ -536,25 +541,22 @@ public class Principal extends javax.swing.JFrame {
 
         jtblMonopolyPrincipal.addTab("Monopoly", jpanelMonopoly);
 
-        jtxtErroresCorreccion.setColumns(20);
-        jtxtErroresCorreccion.setRows(5);
-        jScrollPane2.setViewportView(jtxtErroresCorreccion);
+        jtxtErroresCorrecion.setEditable(false);
+        jtxtErroresCorrecion.setColumns(20);
+        jtxtErroresCorrecion.setRows(5);
+        jScrollPane2.setViewportView(jtxtErroresCorrecion);
 
         javax.swing.GroupLayout jpanelCorrecionLayout = new javax.swing.GroupLayout(jpanelCorrecion);
         jpanelCorrecion.setLayout(jpanelCorrecionLayout);
         jpanelCorrecionLayout.setHorizontalGroup(
             jpanelCorrecionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelCorrecionLayout.createSequentialGroup()
-                .addContainerGap(360, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(281, 281, 281))
+            .addGroup(jpanelCorrecionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE))
         );
         jpanelCorrecionLayout.setVerticalGroup(
             jpanelCorrecionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpanelCorrecionLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
         );
 
         jtblMonopolyPrincipal.addTab("Correccion", jpanelCorrecion);
@@ -676,7 +678,7 @@ public class Principal extends javax.swing.JFrame {
         }
         //si dice que no realiza la pregunta con normalidad
         if (!quiereUsarComodin) {
-            Pregunta.hacerPregunta(this, jugadorActual);
+            Pregunta.hacerPregunta(this, jugadorActual,this);
         }
 
         actualizarTablero();
@@ -769,7 +771,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jpanelMonopoly;
     private javax.swing.JPanel jpanelScore;
     private javax.swing.JTabbedPane jtblMonopolyPrincipal;
-    private javax.swing.JTextArea jtxtErroresCorreccion;
+    private javax.swing.JTextArea jtxtErroresCorrecion;
     private javax.swing.JTextField jtxtJ1;
     private javax.swing.JTextField jtxtJ2;
     // End of variables declaration//GEN-END:variables
