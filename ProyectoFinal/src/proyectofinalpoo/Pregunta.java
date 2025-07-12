@@ -47,8 +47,7 @@ public class Pregunta {
         String respuesta = JOptionPane.showInputDialog(parent, p.getEnunciado());
         //para el txt
         String respuestaJugador = (respuesta != null) ? respuesta : "Sin respuesta";
-        
-        
+
         // si es si agrega puntaje
         if (respuesta != null && respuesta.equalsIgnoreCase(p.getRespuesta())) {
             jugador.sumarPuntos(10);
@@ -60,6 +59,5 @@ public class Pregunta {
         }
         //para el txt
         jugador.agregarRegistro(new RegistroPregunta(p.getEnunciado(), respuestaJugador, p.getRespuesta()));
-        
     }
 }

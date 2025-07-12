@@ -1,7 +1,7 @@
 package proyectofinalpoo;
 
 
-import java.awt.Dimension;
+import java.awt.Dimension;  
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author Aaron
  */
 public class Principal extends javax.swing.JFrame {
-
+    
     private String nombreJugador1 = "Jugador1";
     private String nombreJugador2 = "Jugador2";
     private Juego juego;
@@ -194,7 +194,9 @@ public class Principal extends javax.swing.JFrame {
         jlblNumeroDado = new javax.swing.JLabel();
         jbtnTirar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jpanelCorrecion = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtxtErroresCorreccion = new javax.swing.JTextArea();
         jpanelScore = new javax.swing.JPanel();
         jlblPuntos1 = new javax.swing.JLabel();
         jlblResultado1 = new javax.swing.JLabel();
@@ -215,18 +217,15 @@ public class Principal extends javax.swing.JFrame {
         jTextArea1.setBackground(new java.awt.Color(245, 245, 220));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("El juego consiste en varias preguntas que constaran de unos enciados donde estudiaremos temas importantes como la suma, una operación básica que combina cantidades para obtener un total, y la resta, que consiste en encontrar la diferencia entre números. También aprenderemos sobre la multiplicación, una forma rápida de sumar grupos iguales, y la división, que nos ayuda a repartir cantidades en partes equitativas. Además, exploraremos la fascinante historia del Perú, desde sus antiguas civilizaciones como los incas hasta su desarrollo en la época colonial y republicana, conociendo sus grandes logros y desafíos. Por último, profundizaremos en la geografía peruana, analizando sus tres regiones naturales costa, sierra y selva, sus recursos, climas y las principales ciudades que conforman este diverso país. Estos temas nos darán una base sólida tanto en matemáticas como en el conocimiento de nuestro país.");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jtxtJ1.setBackground(new java.awt.Color(255, 255, 255));
         jtxtJ1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtJ1.setBorder(javax.swing.BorderFactory.createTitledBorder("Jugador1"));
 
-        jtxtJ2.setBackground(new java.awt.Color(255, 255, 255));
         jtxtJ2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtxtJ2.setBorder(javax.swing.BorderFactory.createTitledBorder("Jugador2"));
 
@@ -537,18 +536,28 @@ public class Principal extends javax.swing.JFrame {
 
         jtblMonopolyPrincipal.addTab("Monopoly", jpanelMonopoly);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1270, Short.MAX_VALUE)
+        jtxtErroresCorreccion.setColumns(20);
+        jtxtErroresCorreccion.setRows(5);
+        jScrollPane2.setViewportView(jtxtErroresCorreccion);
+
+        javax.swing.GroupLayout jpanelCorrecionLayout = new javax.swing.GroupLayout(jpanelCorrecion);
+        jpanelCorrecion.setLayout(jpanelCorrecionLayout);
+        jpanelCorrecionLayout.setHorizontalGroup(
+            jpanelCorrecionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelCorrecionLayout.createSequentialGroup()
+                .addContainerGap(360, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(281, 281, 281))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
+        jpanelCorrecionLayout.setVerticalGroup(
+            jpanelCorrecionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelCorrecionLayout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
-        jtblMonopolyPrincipal.addTab("Correccion", jPanel3);
+        jtblMonopolyPrincipal.addTab("Correccion", jpanelCorrecion);
 
         jpanelScore.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -724,8 +733,8 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jbtnNombreConfirma;
     private javax.swing.JButton jbtnTirar;
@@ -753,12 +762,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jlblResultado1;
     private javax.swing.JLabel jlblResultado2;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JPanel jpanelCorrecion;
     private javax.swing.JPanel jpanelIntroduccion;
     private javax.swing.JPanel jpanelJ1;
     private javax.swing.JPanel jpanelJ2;
     private javax.swing.JPanel jpanelMonopoly;
     private javax.swing.JPanel jpanelScore;
     private javax.swing.JTabbedPane jtblMonopolyPrincipal;
+    private javax.swing.JTextArea jtxtErroresCorreccion;
     private javax.swing.JTextField jtxtJ1;
     private javax.swing.JTextField jtxtJ2;
     // End of variables declaration//GEN-END:variables
